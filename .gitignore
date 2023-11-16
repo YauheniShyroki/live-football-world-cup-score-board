@@ -26,3 +26,6 @@ replay_pid*
 # folders
 target
 .idea
+
+# draw.io tmp files
+*.drawio.*
