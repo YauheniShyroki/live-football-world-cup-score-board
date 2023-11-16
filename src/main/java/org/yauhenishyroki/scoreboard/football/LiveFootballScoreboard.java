@@ -1,28 +1,27 @@
 package org.yauhenishyroki.scoreboard.football;
 
 import lombok.Getter;
-import org.yauhenishyroki.scoreboard.Match;
 import org.yauhenishyroki.scoreboard.Scoreboard;
 
 import java.util.List;
 
 @Getter
-public final class LiveFootballScoreboard implements Scoreboard<Match<FootballTeam>> {
+public final class LiveFootballScoreboard implements Scoreboard<FootballMatch> {
 
-    private List<Match<FootballTeam>> liveMatches;
+    private List<FootballMatch> liveMatches;
 
     @Override
-    public void startMatch(Match<FootballTeam> match) {
+    public void startMatch(FootballMatch match) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void updateScore(Match<FootballTeam> match, int homeTeamScore, int awayTeamScore) {
+    public void updateScore(FootballMatch match, int homeTeamScore, int awayTeamScore) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void finishMatch(Match<FootballTeam> match) {
+    public void finishMatch(FootballMatch match) {
         throw new UnsupportedOperationException();
     }
 

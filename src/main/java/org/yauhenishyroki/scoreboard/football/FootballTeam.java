@@ -4,6 +4,14 @@ import org.yauhenishyroki.scoreboard.Team;
 
 public final class FootballTeam extends Team {
 
+    public FootballTeam(String name, int score) {
+        super(name, score);
+    }
+
+    public FootballTeam(String name) {
+        super(name);
+    }
+
     public int incrementScore() {
         throw new UnsupportedOperationException();
     }
