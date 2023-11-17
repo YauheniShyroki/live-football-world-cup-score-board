@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public class Match<T extends Team> {
 
-    private final T homeTeam;
-    private final T awayTeam;
+    protected final T homeTeam;
+    protected final T awayTeam;
 
     public Match(T homeTeam, T awayTeam) {
         this.homeTeam = homeTeam;
@@ -14,14 +14,15 @@ public class Match<T extends Team> {
     }
 
     public void updateScores(int homeTeamScore, int awayTeamScore) {
-        throw new UnsupportedOperationException();
+        updateHomeTeamScore(homeTeamScore);
+        updateAwayTeamScore(awayTeamScore);
     }
 
     public void updateHomeTeamScore(int homeTeamScore) {
-        throw new UnsupportedOperationException();
+        this.homeTeam.setScore(homeTeamScore);
     }
 
     public void updateAwayTeamScore(int awayTeamScore) {
-        throw new UnsupportedOperationException();
+        this.awayTeam.setScore(awayTeamScore);
     }
 }

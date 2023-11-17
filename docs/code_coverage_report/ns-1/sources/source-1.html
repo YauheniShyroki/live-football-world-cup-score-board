@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.yauhenishyroki</a>
+</div>
+
+<h1>Coverage Summary for Class: Main (org.yauhenishyroki)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Main</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.yauhenishyroki;
+&nbsp;
+&nbsp;import org.yauhenishyroki.scoreboard.football.FootballMatch;
+&nbsp;import org.yauhenishyroki.scoreboard.football.FootballTeam;
+&nbsp;import org.yauhenishyroki.scoreboard.football.LiveFootballScoreboard;
+&nbsp;
+<b class="nc">&nbsp;public class Main {</b>
+&nbsp;
+&nbsp;    private static final String LIVERPOOL_TOTTENHAM_1_12_PREMIER_MATCH_NAME = &quot;Liverpool-Tottenham-1/12-premier&quot;;
+&nbsp;    private static final String PSG_BARCELONA_FRIENDLY_MATCH_NAME = &quot;PSG-Barcelona-Friendly&quot;;
+&nbsp;    public static final String JUNIORS_MATCH_NAME = &quot;Juniors&quot;;
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+<b class="nc">&nbsp;        LiveFootballScoreboard scoreboard = new LiveFootballScoreboard();</b>
+&nbsp;
+<b class="nc">&nbsp;        FootballTeam liverpoolTeam = new FootballTeam(&quot;Liverpool&quot;);</b>
+<b class="nc">&nbsp;        FootballTeam tottenhamTeam = new FootballTeam(&quot;Tottenham&quot;);</b>
+<b class="nc">&nbsp;        FootballMatch liverpoolTottenhamMatch = new FootballMatch(LIVERPOOL_TOTTENHAM_1_12_PREMIER_MATCH_NAME, liverpoolTeam, tottenhamTeam);</b>
+&nbsp;
+<b class="nc">&nbsp;        scoreboard.startMatch(liverpoolTottenhamMatch);</b>
+&nbsp;
+<b class="nc">&nbsp;        FootballTeam psgTeam = new FootballTeam(&quot;PSG&quot;);</b>
+<b class="nc">&nbsp;        FootballTeam barcelonaTeam = new FootballTeam(&quot;Barcelona&quot;);</b>
+<b class="nc">&nbsp;        FootballMatch psgBarcelonaMatch = new FootballMatch(PSG_BARCELONA_FRIENDLY_MATCH_NAME, psgTeam, barcelonaTeam);</b>
+&nbsp;
+<b class="nc">&nbsp;        scoreboard.startMatch(psgBarcelonaMatch);</b>
+&nbsp;
+<b class="nc">&nbsp;        FootballTeam juniorOneTeam = new FootballTeam(&quot;Junior1&quot;);</b>
+<b class="nc">&nbsp;        FootballTeam juniorTwoTeam = new FootballTeam(&quot;Junior2&quot;);</b>
+<b class="nc">&nbsp;        FootballMatch juniorsMatch = new FootballMatch(JUNIORS_MATCH_NAME, juniorOneTeam, juniorTwoTeam);</b>
+&nbsp;
+<b class="nc">&nbsp;        scoreboard.startMatch(juniorsMatch);</b>
+&nbsp;
+<b class="nc">&nbsp;        scoreboard.updateScore(FootballMatch.of(LIVERPOOL_TOTTENHAM_1_12_PREMIER_MATCH_NAME), 1, 1);</b>
+<b class="nc">&nbsp;        scoreboard.updateScore(FootballMatch.of(PSG_BARCELONA_FRIENDLY_MATCH_NAME), 3, 2);</b>
+<b class="nc">&nbsp;        scoreboard.updateScore(FootballMatch.of(JUNIORS_MATCH_NAME), 2, 3);</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Before Finishing Match:&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(scoreboard.summary());</b>
+&nbsp;
+<b class="nc">&nbsp;        scoreboard.finishMatch(FootballMatch.of(PSG_BARCELONA_FRIENDLY_MATCH_NAME));</b>
+&nbsp;
+<b class="nc">&nbsp;        System.out.println();</b>
+<b class="nc">&nbsp;        System.out.println(&quot;After Finishing Match:&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(scoreboard.summary());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-17 16:42</div>
+</div>
+</body>
+</html>

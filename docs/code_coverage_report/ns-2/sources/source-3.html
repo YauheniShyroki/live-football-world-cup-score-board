@@ -1,0 +1,80 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Scoreboard</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.yauhenishyroki.scoreboard</a>
+</div>
+
+<h1>Coverage Summary for Class: Scoreboard (org.yauhenishyroki.scoreboard)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Scoreboard</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.yauhenishyroki.scoreboard;
+&nbsp;
+&nbsp;public interface Scoreboard&lt;T extends Match&lt;? extends Team&gt;&gt; {
+&nbsp;
+&nbsp;    void startMatch(T match);
+&nbsp;
+&nbsp;    void updateScore(T match, int homeTeamScore, int awayTeamScore);
+&nbsp;
+&nbsp;    void finishMatch(T match);
+&nbsp;
+&nbsp;    String summary();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-17 16:42</div>
+</div>
+</body>
+</html>

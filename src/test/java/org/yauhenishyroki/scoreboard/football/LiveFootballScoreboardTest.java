@@ -76,6 +76,21 @@ class LiveFootballScoreboardTest {
         });
     }
 
+    @Test
+    @DisplayName("startMatch method trying to add existing match")
+    void startExistingMatch() {
+        //given
+        FootballMatch footballMatch = generateTestFootballMatch();
+
+        //when
+        scoreboard.startMatch(footballMatch);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.startMatch(footballMatch);
+        });
+    }
+
     @ParameterizedTest
     @MethodSource("provideScoresForPositiveTest")
     @DisplayName("Positive: update scores for a match")
@@ -128,6 +143,14 @@ class LiveFootballScoreboardTest {
     }
 
     @Test
+    @DisplayName("trying to update scores for a non-existing match")
+    void updateScoreForNonExistingMatch() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.updateScore(FootballMatch.of(randomString.nextString()), 0, 0);
+        });
+    }
+
+    @Test
     @DisplayName("finnishMatch method should remove a match from liveMatches list with only one match")
     void finishMatchShouldRemoveMatchFromSingletonLiveMatches() {
         //given
@@ -161,6 +184,27 @@ class LiveFootballScoreboardTest {
     }
 
     @Test
+    @DisplayName("Trying to finish null match")
+    void finishNullMatch() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.finishMatch(null);
+        });
+    }
+
+    @Test
+    @DisplayName("finnishMatch method shouldn't throw exception on non-existing match")
+    void finishMatchOnNonExistingMatch() {
+        //given
+        FootballMatch footballMatch = generateTestFootballMatch();
+
+        //when
+        //then
+        assertDoesNotThrow(() -> scoreboard.finishMatch(footballMatch));
+        assertFalse(scoreboard.getLiveMatches().contains(footballMatch));
+        assertEquals(0, scoreboard.getLiveMatches().size());
+    }
+
+    @Test
     @DisplayName("Getting summary for multiple matches")
     void summaryTest() {
         //given
@@ -190,7 +234,7 @@ class LiveFootballScoreboardTest {
     @SuppressWarnings("unchecked")
     private Comparator<FootballMatch> comparatorForSummary() {
         return ComparatorUtils.chainedComparator(
-                Comparator.comparingInt(this::getTotalScore),
+                Comparator.comparingInt(this::getTotalScore).reversed(),
                 Comparator.comparingInt(this::getIndexInList));
     }
 
@@ -212,7 +256,7 @@ class LiveFootballScoreboardTest {
     }
 
     @Test
-    @DisplayName("Getting summary for zezo matches")
+    @DisplayName("Getting summary for zero matches")
     void zeroMatchesSummaryTest() {
         String summary = scoreboard.summary();
 
@@ -231,6 +275,6 @@ class LiveFootballScoreboardTest {
     private FootballMatch generateTestFootballMatch() {
         FootballTeam homeTeam = new FootballTeam(randomString.nextString(), random.nextInt(10));
         FootballTeam awayTeam = new FootballTeam(randomString.nextString(), random.nextInt(10));
-        return new FootballMatch(homeTeam, awayTeam);
+        return new FootballMatch(randomString.nextString(), homeTeam, awayTeam);
     }
 }

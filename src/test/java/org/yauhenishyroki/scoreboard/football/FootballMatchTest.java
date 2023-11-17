@@ -18,7 +18,7 @@ class FootballMatchTest {
     void setUp() {
         FootballTeam homeTeam = new FootballTeam("home", random.nextInt(10));
         FootballTeam awayTeam = new FootballTeam("away", random.nextInt(10));
-        this.footballMatch = new FootballMatch(homeTeam, awayTeam);
+        this.footballMatch = new FootballMatch("match", homeTeam, awayTeam);
     }
 
     @Test

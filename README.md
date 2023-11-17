@@ -11,6 +11,10 @@
 ### UML Diagram
 ![UML Diagram](docs/uml_diagram.png)
 
+### Latest Code Coverage
+***(Full Report is available in docs/code_coverage_report/index.html)***
+![Code Coverage](docs/code_coverage_img.png)
+
 ### Assumptions
 1. I've decided to add increment methods to Match and Team implementations, 
 because some games have a rule of "incrementational" way of updating a score

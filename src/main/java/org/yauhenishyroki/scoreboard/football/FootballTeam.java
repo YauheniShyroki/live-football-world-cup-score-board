@@ -13,6 +13,6 @@ public final class FootballTeam extends Team {
     }
 
     public int incrementScore() {
-        throw new UnsupportedOperationException();
+        return ++this.score;
     }
 }

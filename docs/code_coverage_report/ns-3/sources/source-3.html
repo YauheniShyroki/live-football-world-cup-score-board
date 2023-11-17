@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > LiveFootballScoreboard</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.yauhenishyroki.scoreboard.football</a>
+</div>
+
+<h1>Coverage Summary for Class: LiveFootballScoreboard (org.yauhenishyroki.scoreboard.football)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LiveFootballScoreboard</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97%
+  </span>
+  <span class="absValue">
+    (32/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.yauhenishyroki.scoreboard.football;
+&nbsp;
+&nbsp;import lombok.Getter;
+&nbsp;import org.apache.commons.collections4.ComparatorUtils;
+&nbsp;import org.yauhenishyroki.scoreboard.Scoreboard;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@Getter
+&nbsp;public final class LiveFootballScoreboard implements Scoreboard&lt;FootballMatch&gt; {
+&nbsp;
+<b class="fc">&nbsp;    private final List&lt;FootballMatch&gt; liveMatches;</b>
+&nbsp;
+<b class="fc">&nbsp;    public LiveFootballScoreboard() {</b>
+<b class="fc">&nbsp;        this.liveMatches = new ArrayList&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void startMatch(FootballMatch match) {
+<b class="fc">&nbsp;        getFootballMatchFromLiveMatches(match)</b>
+<b class="fc">&nbsp;                .ifPresentOrElse(</b>
+<b class="fc">&nbsp;                        foundMatch -&gt; { throw new IllegalArgumentException(&quot;A match with name &#39;&quot; + match.getName() + &quot;&#39; exists&quot;); },</b>
+<b class="fc">&nbsp;                        () -&gt; liveMatches.add(match));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void updateScore(FootballMatch match, int homeTeamScore, int awayTeamScore) {
+<b class="fc">&nbsp;        getFootballMatchFromLiveMatches(match)</b>
+<b class="fc">&nbsp;                .ifPresentOrElse(</b>
+<b class="fc">&nbsp;                        foundMatch -&gt; foundMatch.updateScores(homeTeamScore, awayTeamScore),</b>
+<b class="fc">&nbsp;                        () -&gt; { throw new IllegalArgumentException(&quot;Failed to find a match with name &#39;&quot; + match.getName() + &quot;&#39;&quot;); }</b>
+&nbsp;                );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void finishMatch(FootballMatch match) {
+<b class="fc">&nbsp;        getFootballMatchFromLiveMatches(match)</b>
+<b class="fc">&nbsp;                .ifPresent(liveMatches::remove);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Optional&lt;FootballMatch&gt; getFootballMatchFromLiveMatches(FootballMatch match) {
+<b class="fc">&nbsp;        if (Objects.isNull(match)) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Match is null&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;FootballMatch&gt; foundMatches = liveMatches.stream()</b>
+<b class="fc">&nbsp;                .filter(liveMatch -&gt; liveMatch.getName().equals(match.getName()))</b>
+<b class="fc">&nbsp;                .toList();</b>
+<b class="fc">&nbsp;        if (foundMatches.isEmpty()) {</b>
+<b class="fc">&nbsp;            return Optional.empty();</b>
+<b class="fc">&nbsp;        } else if (foundMatches.size() &gt; 1) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Found more than one match by name &#39;&quot; + match.getName() + &quot;&#39;&quot;);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return Optional.of(foundMatches.get(0));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String summary() {
+<b class="fc">&nbsp;        return getSummaryForMatches(liveMatches);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String getSummaryForMatches(List&lt;FootballMatch&gt; footballMatches) {
+<b class="fc">&nbsp;        return footballMatches.stream()</b>
+<b class="fc">&nbsp;                .sorted(comparatorForSummary())</b>
+<b class="fc">&nbsp;                .map(FootballMatch::toString)</b>
+<b class="fc">&nbsp;                .collect(Collectors.joining(&quot;\n&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private Comparator&lt;FootballMatch&gt; comparatorForSummary() {
+<b class="fc">&nbsp;        return ComparatorUtils.chainedComparator(</b>
+<b class="fc">&nbsp;                Comparator.comparingInt(this::getTotalScore).reversed(),</b>
+<b class="fc">&nbsp;                Comparator.comparingInt(this::getIndexInList));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getTotalScore(FootballMatch footballMatch) {
+<b class="fc">&nbsp;        return footballMatch.getHomeTeam().getScore() + footballMatch.getAwayTeam().getScore();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getIndexInList(FootballMatch footballMatch) {
+<b class="fc">&nbsp;        return liveMatches.indexOf(footballMatch);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-17 16:42</div>
+</div>
+</body>
+</html>
