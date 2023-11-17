@@ -8,11 +8,11 @@ public final class FootballMatch extends Match<FootballTeam> {
         super(homeTeam, awayTeam);
     }
 
-    public void incrementHomeTeamScore() {
+    public int incrementHomeTeamScore() {
         throw new UnsupportedOperationException();
     }
 
-    public void incrementAwayTeamScore() {
+    public int incrementAwayTeamScore() {
         throw new UnsupportedOperationException();
     }
 }

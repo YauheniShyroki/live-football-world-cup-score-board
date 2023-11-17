@@ -1,13 +1,17 @@
 package org.yauhenishyroki.scoreboard.football;
 
+import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FootballTeamTest {
+
+    private final Random random = new Random();
+    private final RandomString randomString = new RandomString();
 
     @Test
     @DisplayName("Score for football team should be zero on init without specifying it")
@@ -16,7 +20,7 @@ class FootballTeamTest {
         FootballTeam footballTeam;
 
         //when
-        footballTeam = new FootballTeam("Any Team");
+        footballTeam = new FootballTeam(randomString.nextString());
 
         //then
         assertEquals(0, footballTeam.getScore());
@@ -26,8 +30,8 @@ class FootballTeamTest {
     @DisplayName("Increment score for football team")
     void incrementScoreTest() {
         //given
-        int score = new Random().nextInt(10);
-        FootballTeam team = new FootballTeam("Liverpool", score);
+        int score = random.nextInt(10);
+        FootballTeam team = new FootballTeam(randomString.nextString(), score);
 
         //when
         int incrementedScore = team.incrementScore();
